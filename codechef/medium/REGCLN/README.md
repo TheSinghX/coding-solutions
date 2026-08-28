@@ -80,16 +80,20 @@ Today is day $49$. The next deep cleaning will be on day $50$, so the answer is 
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-26T16:00:37.711Z  
+**Submitted:** 2026-08-26T16:02:28.948Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
+    int N;
+    cin >> N;
 
+    cout << 10 - (N % 10) << endl;
+
+    return 0;
 }
-
 ```
 
 ---
