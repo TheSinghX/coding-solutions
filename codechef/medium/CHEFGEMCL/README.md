@@ -53,7 +53,7 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T07:00:11.543Z  
+**Submitted:** 2026-08-05T06:42:10.737Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -87,14 +87,14 @@ int main() {
 	            cout << -1;
 	            else 
 	                cout << pq.top();
-	            if(i != N - 1)
+	            if(i != N - 1){
 	                cout << " ";
 	            }
 	            cout << "\n";
 	       }
 	       return 0;
-}	
-
+	}	
+}
 
 ```
 
