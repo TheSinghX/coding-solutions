@@ -53,7 +53,7 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T06:34:54.760Z  
+**Submitted:** 2026-08-05T06:39:13.485Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -76,24 +76,24 @@ int main() {
 	        int x;
 	        cin >> x;
 	            
-	            if((int)pq.size() < K){
+	            if((int)pq.size() < K)
 	                pq.push(x);
-	            }else if(x > pq.top()){
+	            else if(x > pq.top()){
 	                pq.pop();
 	                pq.push(x);
 	            }
-	            if ((int)pq.size() < K){
+	            
+	            if ((int)pq.size() < K)
 	            cout << -1;
-	            }else {
+	            else 
 	                cout << pq.top();
-	            }if(i != N - 1){
+	            if(i != N - 1){
 	                cout << " ";
 	            }
 	            cout << "\n";
 	       }
 	       return 0;
-	
-	}
+	}	
 }
 
 ```
