@@ -53,7 +53,7 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T06:00:49.078Z  
+**Submitted:** 2026-08-05T06:01:00.539Z  
 
 ```c_cpp
 class Solution {
