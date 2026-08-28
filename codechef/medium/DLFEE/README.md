@@ -61,17 +61,23 @@ Therefore, the total amount is $600$.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-10T16:14:03.395Z  
+**Submitted:** 2026-08-10T16:14:31.236Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-	// your code goes here
+    int A, B, K;
+    cin >> A >> B >> K;
 
+    if (A >= K)
+        cout << A;
+    else
+        cout << A + B;
+
+    return 0;
 }
-
 ```
 
 ---
