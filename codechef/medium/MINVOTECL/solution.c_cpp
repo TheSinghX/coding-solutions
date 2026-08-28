@@ -7,33 +7,34 @@ int main() {
 	
 	int T;
 	cin >> T;
-	
 	while(T--){
-	    int K, N;
-	    cin >> K >> N;
+	    int N;
+	    cin >> N;
 	    
-	    priority_queue<int, vector<int>, greater<int>> pq;
+	    vector<long long> S(N+1), P(N+1,0);
+	    for(int i=1;i <= N; i++){
+	        cin >> S[i]; P[i]=P[i-1]+S[i]; }
+	        
+	    vector<long long> diff(N+2,0);
+	    for(int j=1;j<=N;j++){
+	        long long target = P[j-1]-S[j];
+	        int pos = lower_bound(P.begin(), P.end()+j, target) - P.begin();
+	        int Lj = max(1, pos);
+	        if(Lj <= j-1) { diff[Lj]++; diff[j]--; }
+	        
+	        long long target2 = P[j]+S[j];
+	        int pos2 = upper_bound(P.begin()+j, P.end(), target2) - P.begin();
+	        int Rj = min(N, pos2);
+	        if(Rj >= j+1) { diff[j+1]++; diff[Rj+1]--; }
+	        
+	    }
 	    
-	    for(int i =0;i < N;i++){
-	        int x;
-	        cin >> x;
-	            
-	            if((int)pq.size() < K)
-	                pq.push(x);
-	            else if(x > pq.top()){
-	                pq.pop();
-	                pq.push(x);
-	            }
-	            
-	            if ((int)pq.size() < K)
-	            cout << -1;
-	            else 
-	                cout << pq.top();
-	            if(i != N - 1)
-	                cout << " ";
-	            }
-	            cout << "\n";
-	       }
-	       return 0;
-}	
-
+	    long long cur = 0;
+	    for(int i=1;i <= N; i++){
+	        cur += diff[i];
+	        cout << cur << " \n"[i==N];
+	    }
+	}
+	
+	return 0;
+}
