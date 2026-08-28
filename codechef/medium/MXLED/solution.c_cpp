@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    int sum1 = 0, sum2 = 0;
+    int maxLead = 0, winner = 0;
+
+    for (int i = 0; i < N; i++) {
+        int S, T;
+        cin >> S >> T;
+
+        sum1 += S;
+        sum2 += T;
+
+        int lead = abs(sum1 - sum2);
+
+        if (lead > maxLead) {
+            maxLead = lead;
+
+            if (sum1 > sum2)
+                winner = 1;
+            else
+                winner = 2;
+        }
+    }
+
+    cout << winner << " " << maxLead;
+
+    return 0;
+}
