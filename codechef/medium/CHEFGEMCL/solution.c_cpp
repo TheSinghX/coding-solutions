@@ -18,22 +18,22 @@ int main() {
 	        int x;
 	        cin >> x;
 	            
-	            if((int)pq.size() < K){
+	            if((int)pq.size() < K)
 	                pq.push(x);
-	            }else if(x > pq.top()){
+	            else if(x > pq.top()){
 	                pq.pop();
 	                pq.push(x);
 	            }
-	            if ((int)pq.size() < K){
+	            
+	            if ((int)pq.size() < K)
 	            cout << -1;
-	            }else {
+	            else 
 	                cout << pq.top();
-	            }if(i != N - 1){
+	            if(i != N - 1){
 	                cout << " ";
 	            }
 	            cout << "\n";
 	       }
 	       return 0;
-	
-	}
+	}	
 }
