@@ -72,17 +72,29 @@ Keep any one copy; the final string is $01$ which is optimal.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-12T16:29:27.365Z  
+**Submitted:** 2026-08-12T16:29:50.922Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-	// your code goes here
+    int T;
+    cin >> T;
 
+    while (T--) {
+        int N;
+        string S;
+        cin >> N >> S;
+
+        if (S.find("01") != string::npos)
+            cout << "01\n";
+        else
+            cout << S << '\n';
+    }
+
+    return 0;
 }
-
 ```
 
 ---
