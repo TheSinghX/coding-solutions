@@ -65,17 +65,49 @@ For the given costs, this is optimal.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-26T16:17:09.766Z  
+**Submitted:** 2026-08-26T16:18:04.498Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-	// your code goes here
+    int T;
+    cin >> T;
 
+    while (T--) {
+        int A, B, P, Q, R;
+        cin >> A >> B >> P >> Q >> R;
+
+        const int INF = 1e9;
+        vector<vector<int>> dp(A + 1, vector<int>(B + 1, INF));
+
+        dp[0][0] = 0;
+
+        for (int i = 0; i <= A; i++) {
+            for (int j = 0; j <= B; j++) {
+                if (i >= 1)
+                    dp[i][j] = min(dp[i][j], dp[i - 1][j] + P);
+
+                if (i >= 2)
+                    dp[i][j] = min(dp[i][j], dp[i - 2][j] + P);
+
+                if (j >= 1)
+                    dp[i][j] = min(dp[i][j], dp[i][j - 1] + Q);
+
+                if (j >= 2)
+                    dp[i][j] = min(dp[i][j], dp[i][j - 2] + Q);
+
+                if (i >= 1 && j >= 1)
+                    dp[i][j] = min(dp[i][j], dp[i - 1][j - 1] + R);
+            }
+        }
+
+        cout << dp[A][B] << endl;
+    }
+
+    return 0;
 }
-
 ```
 
 ---
