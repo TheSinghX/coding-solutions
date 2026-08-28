@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int T;
+	cin >> T;
+	while(T--){
+	    int N, K;
+	    cin >> N >> K;
+	    vector<long long> W(N);
+	    for(auto &w : W) cin >> w;
+	    
+	    sort(W.begin(),W.end());
+	    
+	    long long S = 0;
+	    for(auto w : W) S += w;
+	    
+	    long long smallKSum = 0;
+	    for(int i = 0; i < K; i++) smallKSum += W[i];
+	    
+	    long long largeKSum = 0;
+	    for(int i= N - K; i < N; i++) largeKSum += W[i];
+	    
+	    long long diff1 = llabs(2 * smallKSum - S);
+	    long long diff2 = llabs(2 * largeKSum - S);
+	    
+	    cout << max(diff1, diff2) << "\n";
+	}
+	
+	return 0;
+
+}
