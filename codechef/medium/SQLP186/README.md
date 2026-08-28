@@ -59,7 +59,7 @@ the_singhx singhlakshay7374@gmail.com the_singhx singhlakshay7374@gmail.com the_
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T07:49:10.119Z  
+**Submitted:** 2026-08-05T07:49:21.681Z  
 
 ```sql
 SELECT
