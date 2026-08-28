@@ -1,40 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
+const long long MOD = 1e9+7;
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
 	
-	int T;
-	cin >> T;
-	while(T--){
-	    int N;
-	    cin >> N;
-	    
-	    vector<long long> S(N+1), P(N+1,0);
-	    for(int i=1;i <= N; i++){
-	        cin >> S[i]; P[i]=P[i-1]+S[i]; }
-	        
-	    vector<long long> diff(N+2,0);
-	    for(int j=1;j<=N;j++){
-	        long long target = P[j-1]-S[j];
-	        int pos = lower_bound(P.begin(), P.end()+j, target) - P.begin();
-	        int Lj = max(1, pos);
-	        if(Lj <= j-1) { diff[Lj]++; diff[j]--; }
-	        
-	        long long target2 = P[j]+S[j];
-	        int pos2 = upper_bound(P.begin()+j, P.end(), target2) - P.begin();
-	        int Rj = min(N, pos2);
-	        if(Rj >= j+1) { diff[j+1]++; diff[Rj+1]--; }
-	        
-	    }
-	    
-	    long long cur = 0;
-	    for(int i=1;i <= N; i++){
-	        cur += diff[i];
-	        cout << cur << " \n"[i==N];
-	    }
-	}
+	int N, B;
+	cin >> N >> B;
+	vector<int> n(N+1);
+	for(int i=1;i<=N;i++)
+	cin >> n[i];
 	
+	vector<long long> f(N+2, 0), S(N+2, 0);
+	
+	f[B] = 1;
+	S[B] = 1;
+	
+	for(int i=B-1;i>=1;i--){
+	    int hi = min(i+n[i], B);
+	    if(hi > i){
+	        long long val = (S[i+1] - S[hi+1] % MOD + MOD) % MOD;
+	        f[i] = val;
+	    }else {
+	        f[i] =0;
+	    }
+	    S[i] = (f[i] + S[i+1]) % MOD;
+	}
+	int Q;
+	cin >> Q;
+	while(Q--){
+	    int A;
+	    cin >> A;
+	    cout << f[A] << " \n";
+	}
 	return 0;
+
 }
