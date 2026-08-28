@@ -31,7 +31,7 @@ Retrieve all players who have characters with race 'Elf'
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T07:46:10.259Z  
+**Submitted:** 2026-08-05T07:46:23.035Z  
 
 ```sql
 -- your code goes here
