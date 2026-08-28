@@ -53,17 +53,28 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T16:26:06.216Z  
+**Submitted:** 2026-08-05T16:26:35.624Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-	// your code goes here
+    int T;
+    cin >> T;
 
+    while (T--) {
+        int N, X, Y;
+        cin >> N >> X >> Y;
+
+        if (N <= 3)
+            cout << N * X << endl;
+        else
+            cout << 3 * X + (N - 3) * Y << endl;
+    }
+
+    return 0;
 }
-
 ```
 
 ---
