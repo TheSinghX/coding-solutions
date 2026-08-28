@@ -46,9 +46,9 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 ## Solution
 
 **Language:** C++  
-**Runtime:** 10 ms (beats 65.73%)  
-**Memory:** 19 MB (beats 43.20%)  
-**Submitted:** 2026-08-28T17:31:24.225Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 18.8 MB (beats 45.83%)  
+**Submitted:** 2026-08-28T17:31:03.689Z  
 
 ```cpp
 class Solution {
