@@ -70,7 +70,7 @@ Therefore, the answer is $2$
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-10T16:16:45.027Z  
+**Submitted:** 2026-08-10T16:16:50.050Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
