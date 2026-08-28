@@ -55,20 +55,19 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T16:24:31.248Z  
+**Submitted:** 2026-08-05T16:25:33.685Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-	int N;
-	cin >> N;
-	
-	cout << 20 - N;
-	
-	return 0;
-
+    int N;
+    cin >> N;
+    
+    cout << 20 - N;
+    
+    return 0;
 }
 
 ```
