@@ -2,6 +2,17 @@
 using namespace std;
 
 int main() {
-	// your code goes here
+    int T;
+    cin >> T;
 
+    while (T--) {
+        int N, M, X;
+        cin >> N >> M >> X;
+
+        int row = (X - 1) / M + 1;
+
+        cout << min(row, N - row + 1) << '\n';
+    }
+
+    return 0;
 }
