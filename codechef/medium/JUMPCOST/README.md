@@ -58,17 +58,42 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-05T16:28:16.197Z  
+**Submitted:** 2026-08-05T16:28:44.480Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-	// your code goes here
+    int T;
+    cin >> T;
 
+    while (T--) {
+        int N;
+        cin >> N;
+
+        vector<int> A(N + 1);
+        for (int i = 1; i <= N; i++)
+            cin >> A[i];
+
+        vector<long long> dp(N + 1, LLONG_MIN);
+        dp[1] = 0;
+
+        long long ans = 0;
+
+        for (int j = 2; j <= N; j++) {
+            for (int i = 1; i < j; i++) {
+                if (dp[i] != LLONG_MIN)
+                    dp[j] = max(dp[j], dp[i] + A[j] - j + i);
+            }
+            ans = max(ans, dp[j]);
+        }
+
+        cout << ans << "\n";
+    }
+
+    return 0;
 }
-
 ```
 
 ---
