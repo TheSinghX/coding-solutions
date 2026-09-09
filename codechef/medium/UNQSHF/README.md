@@ -74,7 +74,7 @@ So, no solution exists.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T14:47:21.748Z  
+**Submitted:** 2026-09-09T14:48:03.242Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -83,17 +83,35 @@ using namespace std;
 int main() {
     int t;
     cin >> t;
-    while(t--){
-        str A, B;
-        cin >> A >> B;
-        int n;
-        for(int i=0;i<n;i++){
-            cin >> a[n];
-        }
-        
-    }
-}
 
+    while (t--) {
+        int n;
+        string A, B;
+
+        cin >> n;
+        cin >> A;
+        cin >> B;
+
+        int countA = 0, countB = 0;
+
+        for (char c : A) {
+            if (c == 'a')
+                countA++;
+        }
+
+        for (char c : B) {
+            if (c == 'a')
+                countB++;
+        }
+
+        if (countA + countB == n)
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+    }
+
+    return 0;
+}
 ```
 
 ---
