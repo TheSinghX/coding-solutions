@@ -65,7 +65,7 @@ It can be verified that there's no way to make a positive profit by the end of t
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T14:55:13.177Z  
+**Submitted:** 2026-09-09T14:56:07.832Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -76,21 +76,28 @@ int main() {
     cin >> t;
 
     while (t--) {
-        int x, y;
+        long long x, y;
         cin >> x >> y;
 
-        long long profit = 0;
-        int days = 0;
-        int gpu = 0;
+        for (int d = 1; ; d++) {
+            long long best = 0;
 
-        while (profit <= 0) {
-            days++;
-            gpu++;
-            profit -= x;
-            profit += 1LL * y * gpu * gpu;
+            for (int k = 0; k <= d; k++) {
+                long long profit = -x * k;
+
+                for (int i = 1; i <= k; i++)
+                    profit += y * i * i;
+
+                profit += 1LL * (d - k) * y * k * k;
+
+                best = max(best, profit);
+            }
+
+            if (best > 0) {
+                cout << d << '\n';
+                break;
+            }
         }
-
-        cout << days << '\n';
     }
 
     return 0;
