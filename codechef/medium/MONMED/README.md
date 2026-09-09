@@ -94,17 +94,92 @@ We print the endpoints of the subarrays, which is $[3, 3]$ for $[1]$ and $[1, 3]
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T14:56:38.766Z  
+**Submitted:** 2026-09-09T14:57:55.340Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-	// your code goes here
+int median(vector<int>& p, int l, int r) {
+    vector<int> v;
+    for (int i = l; i <= r; i++)
+        v.push_back(p[i]);
 
+    sort(v.begin(), v.end());
+    return v[v.size() / 2];
 }
 
+bool solve(vector<int>& p, int l, int r, int last, vector<pair<int,int>>& ans) {
+    int n = p.size();
+
+    if (r - l + 1 == n)
+        return true;
+
+    if (l > 0) {
+        int m = median(p, l - 1, r);
+
+        if (m > last) {
+            ans.push_back({l - 1, r});
+
+            if (solve(p, l - 1, r, m, ans))
+                return true;
+
+            ans.pop_back();
+        }
+    }
+
+    if (r + 1 < n) {
+        int m = median(p, l, r + 1);
+
+        if (m > last) {
+            ans.push_back({l, r + 1});
+
+            if (solve(p, l, r + 1, m, ans))
+                return true;
+
+            ans.pop_back();
+        }
+    }
+
+    return false;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int N;
+        cin >> N;
+
+        vector<int> P(N);
+        for (int &x : P)
+            cin >> x;
+
+        bool found = false;
+
+        for (int i = 0; i < N; i++) {
+            vector<pair<int,int>> ans;
+            ans.push_back({i, i});
+
+            if (solve(P, i, i, P[i], ans)) {
+                for (auto [l, r] : ans)
+                    cout << l + 1 << " " << r + 1 << '\n';
+
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            cout << -1 << '\n';
+    }
+
+    return 0;
+}
 ```
 
 ---
