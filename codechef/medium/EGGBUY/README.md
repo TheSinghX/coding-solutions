@@ -68,20 +68,30 @@ It's better to buy from the second shop, spending $53$ coins.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T14:43:30.856Z  
+**Submitted:** 2026-09-09T14:41:52.720Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    int X, Y, F;
-    cin >> X >> Y >> F;
-
-    cout << min(12 * X, 12 * Y + F) << endl;
-
-    return 0;
+	int x, y, f;
+	cin >> x >> y >> f;
+	
+	for(int i=0;i<n;i++){
+	    cin >> a[i];
+	    
+	    if(X=max){
+	        cout << 12*"x";
+	        
+	        else if(y=max){
+	            cout << 12*"y"+f;
+	        }
+	    }
+	}
+	return 0;
 }
+
 ```
 
 ---
