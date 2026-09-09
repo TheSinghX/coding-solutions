@@ -4,13 +4,32 @@ using namespace std;
 int main() {
     int t;
     cin >> t;
-    while(t--){
-        str A, B;
-        cin >> A >> B;
+
+    while (t--) {
         int n;
-        for(int i=0;i<n;i++){
-            cin >> a[n];
+        string A, B;
+
+        cin >> n;
+        cin >> A;
+        cin >> B;
+
+        int countA = 0, countB = 0;
+
+        for (char c : A) {
+            if (c == 'a')
+                countA++;
         }
-        
+
+        for (char c : B) {
+            if (c == 'a')
+                countB++;
+        }
+
+        if (countA + countB == n)
+            cout << "YES\n";
+        else
+            cout << "NO\n";
     }
+
+    return 0;
 }
