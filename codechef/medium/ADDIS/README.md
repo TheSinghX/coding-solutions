@@ -77,16 +77,39 @@ It can be shown that this is optimal.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T14:51:08.743Z  
+**Submitted:** 2026-09-09T14:51:46.091Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    int x , n;
-    cin >> x >> n;
-    
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+
+        map<long long, int> freq;
+
+        for (int i = 0; i < n; i++) {
+            long long x;
+            cin >> x;
+            freq[x]++;
+        }
+
+        int mx = 0;
+
+        for (auto p : freq) {
+            mx = max(mx, p.second);
+        }
+
+        cout << (mx + 1) / 2 << '\n';
+    }
+
+    return 0;
+}
 ```
 
 ---
