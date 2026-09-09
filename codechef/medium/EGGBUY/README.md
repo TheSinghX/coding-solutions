@@ -68,7 +68,7 @@ It's better to buy from the second shop, spending $53$ coins.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T14:41:30.911Z  
+**Submitted:** 2026-09-09T14:41:46.904Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
