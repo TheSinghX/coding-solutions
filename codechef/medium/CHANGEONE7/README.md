@@ -53,17 +53,47 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:22:17.939Z  
+**Submitted:** 2026-10-14T15:24:01.469Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-	// your code goes here
-
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    sort(a.begin(), a.end());
+    
+    if (n <= 2) {
+        cout << 0 << "\n";
+        return;
+    }
+    
+    int min_diff = INT_MAX;
+    
+    min_diff = min(min_diff, a[n-1] - a[1]);
+    min_diff = min(min_diff, a[n-2] - a[0]);
+    
+    cout << min_diff << "\n";
 }
 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
+}
 ```
 
 ---
