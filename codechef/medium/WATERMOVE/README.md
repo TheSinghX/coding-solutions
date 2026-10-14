@@ -63,7 +63,7 @@ At the end, the array is $[0, 5, 0, 5, 5]$, and the maximum is $5$.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:32:27.842Z  
+**Submitted:** 2026-10-14T15:35:41.504Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -81,12 +81,17 @@ void solve() {
     
     priority_queue<long long, vector<long long>, greater<long long>> pq(a.begin(), a.end());
     
-    for (long long i = 0; i < k && pq.size() > 1; i++) {
+    for (long long i = 0; i < k; i++) {
         long long x = pq.top();
         pq.pop();
-        long long y = pq.top();
-        pq.pop();
-        pq.push(x + y);
+        
+        if (pq.empty()) {
+            pq.push(x);
+        } else {
+            long long y = pq.top();
+            pq.pop();
+            pq.push(x + y);
+        }
     }
     
     long long max_water = 0;
