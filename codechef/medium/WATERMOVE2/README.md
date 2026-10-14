@@ -58,17 +58,49 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:24:40.946Z  
+**Submitted:** 2026-10-14T15:27:11.389Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-	// your code goes here
-
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    vector<long long> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    sort(a.rbegin(), a.rend());
+    
+    if (k >= n - 1) {
+        long long total_sum = 0;
+        for (long long x : a) {
+            total_sum += x;
+        }
+        cout << total_sum << "\n";
+    } else {
+        long long max_water = 0;
+        for (int i = 0; i <= k; i++) {
+            max_water += a[i];
+        }
+        cout << max_water << "\n";
+    }
 }
 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
+}
 ```
 
 ---
