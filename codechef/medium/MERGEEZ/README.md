@@ -72,17 +72,58 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:36:00.943Z  
+**Submitted:** 2026-10-14T15:36:27.451Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-	// your code goes here
+const int MOD = 998244353;
 
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> p(n + 1);
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i];
+    }
+    
+    vector<vector<long long>> dp(n + 1, vector<long long>(n + 1, 0));
+    dp[0][0] = 1;
+    
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (dp[i][j] == 0) continue;
+            int k = i + j + 1;
+            if (k > n) continue;
+            
+            if (i == 0 || p[k] < p[i]) {
+                dp[i + 1][j] = (dp[i + 1][j] + dp[i][j]) % MOD;
+            }
+            if (j == 0 || p[k] < p[n - j + 1]) {
+                dp[i][j + 1] = (dp[i][j + 1] + dp[i][j]) % MOD;
+            }
+        }
+    }
+    
+    for (int i = 0; i <= n; i++) {
+        cout << dp[i][n - i] << (i == n ? "" : " ");
+    }
+    cout << "\n";
 }
 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
+}
 ```
 
 ---
