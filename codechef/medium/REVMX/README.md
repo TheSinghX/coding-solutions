@@ -59,51 +59,58 @@ Output
 
 ## Solution
 
-**Language:** Python  
+**Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:42:43.061Z  
+**Submitted:** 2026-10-14T15:43:46.928Z  
 
-```py
+```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    int t;
-    scanf("%d", &t);
-    while (t--) {
-        int n;
-        scanf("%d", &n);
-        vector<int> P(n + 1), pre(n + 1, 0);
-        for (int i = 1; i <= n; i++) {
-            scanf("%d", &P[i]);
-            pre[i] = pre[i - 1] + (P[i] == i);
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> p(n + 1);
+    int total_fixed = 0;
+    
+    unordered_map<int, int> total_elements_with_sum;
+    unordered_map<int, int> fixed_with_sum;
+    
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i];
+        int s = i + p[i];
+        total_elements_with_sum[s]++;
+        if (p[i] == i) {
+            total_fixed++;
+            fixed_with_sum[s]++;
         }
-        int base = pre[n];
-        vector<pair<int, int>> v; // (s, -m)
-        v.reserve(n);
-        for (int i = 1; i <= n; i++) {
-            if (P[i] != i) {
-                v.push_back({i + P[i], -min(i, P[i])});
-            }
-        }
-        sort(v.begin(), v.end());
-        int best = 0;
-        size_t idx = 0;
-        while (idx < v.size()) {
-            int s = v[idx].first;
-            int gain = 0;
-            bool centerFixed = (s % 2 == 0 && P[s / 2] == s / 2);
-            while (idx < v.size() && v[idx].first == s) {
-                int L = -v[idx].second;
-                gain++;
-                int loss = pre[s - L] - pre[L - 1] - (centerFixed ? 1 : 0);
-                best = max(best, gain - loss);
-                idx++;
-            }
-        }
-        printf("%d\n", base + best);
     }
+    
+    int max_fixed = total_fixed;
+    
+    for (auto& entry : total_elements_with_sum) {
+        int s = entry.first;
+        int t_s = entry.second;
+        int f_s = fixed_with_sum[s];
+        
+        int current_fixed = total_fixed - f_s + t_s;
+        max_fixed = max(max_fixed, current_fixed);
+    }
+    
+    cout << max_fixed << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    
     return 0;
 }
 ```
