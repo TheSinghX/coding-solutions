@@ -62,50 +62,50 @@ Output
 **Language:** Python  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:42:57.930Z  
+**Submitted:** 2026-10-14T15:52:02.646Z  
 
 ```py
-#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-    int t;
-    scanf("%d", &t);
-    while (t--) {
-        int n;
-        scanf("%d", &n);
-        vector<int> P(n + 1), pre(n + 1, 0);
-        for (int i = 1; i <= n; i++) {
-            scanf("%d", &P[i]);
-            pre[i] = pre[i - 1] + (P[i] == i);
-        }
-        int base = pre[n];
-        vector<pair<int, int>> v; // (s, -m)
-        v.reserve(n);
-        for (int i = 1; i <= n; i++) {
-            if (P[i] != i) {
-                v.push_back({i + P[i], -min(i, P[i])});
-            }
-        }
-        sort(v.begin(), v.end());
-        int best = 0;
-        size_t idx = 0;
-        while (idx < v.size()) {
-            int s = v[idx].first;
-            int gain = 0;
-            bool centerFixed = (s % 2 == 0 && P[s / 2] == s / 2);
-            while (idx < v.size() && v[idx].first == s) {
-                int L = -v[idx].second;
-                gain++;
-                int loss = pre[s - L] - pre[L - 1] - (centerFixed ? 1 : 0);
-                best = max(best, gain - loss);
-                idx++;
-            }
-        }
-        printf("%d\n", base + best);
-    }
-    return 0;
-}
+import sys
+def main():
+    data = sys.stdin.buffer.read().split()
+    t = int(data[0]); p = 1
+    out = []
+    for _ in range(t):
+        n = int(data[p]); p += 1
+        P = [0] + list(map(int, data[p:p+n])); p += n
+        pre = [0] * (n + 1)
+        c = 0
+        for i in range(1, n + 1):
+            if P[i] == i:
+                c += 1
+            pre[i] = c
+        base = c
+        M = n + 1
+        keys = []
+        for i in range(1, n + 1):
+            j = P[i]
+            if j != i:
+                m = i if i < j else j
+                keys.append((i + j) * M + (n - m))  # s ascending, m descending
+        keys.sort()
+        best = 0
+        prev_s = -1
+        gain = 0
+        cf = 0
+        for k in keys:
+            s, r = divmod(k, M)
+            L = n - r
+            if s != prev_s:
+                prev_s = s
+                gain = 0
+                cf = 1 if (s % 2 == 0 and P[s // 2] == s // 2) else 0
+            gain += 1
+            v = gain - (pre[s - L] - pre[L - 1] - cf)
+            if v > best:
+                best = v
+        out.append(base + best)
+    print("\n".join(map(str, out)))
+main()
 ```
 
 ---
