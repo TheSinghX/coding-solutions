@@ -72,7 +72,7 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:36:27.451Z  
+**Submitted:** 2026-10-14T15:39:10.063Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -97,19 +97,11 @@ void solve() {
             int k = i + j + 1;
             if (k > n) continue;
             
-            if (i == 0 || p[k] < p[i]) {
-                dp[i + 1][j] = (dp[i + 1][j] + dp[i][j]) % MOD;
-            }
-            if (j == 0 || p[k] < p[n - j + 1]) {
-                dp[i][j + 1] = (dp[i][j + 1] + dp[i][j]) % MOD;
+            if (i < n) {
+                bool can_A = (j == 0);
             }
         }
     }
-    
-    for (int i = 0; i <= n; i++) {
-        cout << dp[i][n - i] << (i == n ? "" : " ");
-    }
-    cout << "\n";
 }
 
 int main() {
