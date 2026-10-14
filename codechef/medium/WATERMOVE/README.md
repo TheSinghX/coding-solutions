@@ -63,56 +63,23 @@ At the end, the array is $[0, 5, 0, 5, 5]$, and the maximum is $5$.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:35:48.498Z  
+**Submitted:** 2026-10-14T15:55:25.564Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-void solve() {
-    int n;
-    long long k;
-    cin >> n >> k;
-    
-    vector<long long> a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    
-    priority_queue<long long, vector<long long>, greater<long long>> pq(a.begin(), a.end());
-    
-    for (long long i = 0; i < k; i++) {
-        long long x = pq.top();
-        pq.pop();
-        
-        if (pq.empty()) {
-            pq.push(x);
-        } else {
-            long long y = pq.top();
-            pq.pop();
-            pq.push(x + y);
-        }
-    }
-    
-    long long max_water = 0;
-    while (!pq.empty()) {
-        max_water = max(max_water, pq.top());
-        pq.pop();
-    }
-    
-    cout << max_water << "\n";
-}
-
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
     int t;
-    cin >> t;
+    scanf("%d", &t);
     while (t--) {
-        solve();
+        int n, k;
+        scanf("%d %d", &n, &k);
+        vector<int> a(n);
+        for (int &x : a) scanf("%d", &x);
+        sort(a.begin(), a.end());
+        printf("%d\n", max(a[n - 1], a[0] + a[1]));
     }
-    
     return 0;
 }
 ```
