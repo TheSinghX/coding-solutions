@@ -72,48 +72,60 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:39:10.063Z  
+**Submitted:** 2026-10-14T15:56:52.674Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
-
-const int MOD = 998244353;
-
-void solve() {
-    int n;
-    cin >> n;
-    vector<int> p(n + 1);
-    for (int i = 1; i <= n; i++) {
-        cin >> p[i];
-    }
-    
-    vector<vector<long long>> dp(n + 1, vector<long long>(n + 1, 0));
-    dp[0][0] = 1;
-    
-    for (int i = 0; i <= n; i++) {
-        for (int j = 0; j <= n; j++) {
-            if (dp[i][j] == 0) continue;
-            int k = i + j + 1;
-            if (k > n) continue;
-            
-            if (i < n) {
-                bool can_A = (j == 0);
-            }
-        }
-    }
-}
+typedef unsigned int u32;
+typedef unsigned long long u64;
+const u32 MOD = 998244353;
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    int t;
-    cin >> t;
-    while (t--) {
-        solve();
+    int T;
+    scanf("%d", &T);
+    while (T--) {
+        int n;
+        scanf("%d", &n);
+        vector<int> P(n + 1);
+        for (int i = 1; i <= n; i++) scanf("%d", &P[i]);
+
+        vector<int> g(n + 1, 0), st;
+        for (int p = 1; p <= n; p++) {
+            while (!st.empty() && P[st.back()] < P[p]) st.pop_back();
+            g[p] = st.empty() ? 0 : st.back();
+            st.push_back(p);
+        }
+
+        int W = n + 1;
+        vector<u32> CA((size_t)W * W, 0), CB((size_t)W * W, 0);
+        vector<u32> ans(n + 1, 0);
+
+        for (int p = 1; p <= n; p++) {
+            u32 *ca = &CA[(size_t)p * W], *cb = &CB[(size_t)p * W];
+            const u32 *pa = &CA[(size_t)(p - 1) * W], *pb = &CB[(size_t)(p - 1) * W];
+            const u32 *ga = &CA[(size_t)g[p] * W], *gb = &CB[(size_t)g[p] * W];
+            copy(pa, pa + W, ca);
+            copy(pb, pb + W, cb);
+            for (int t = 0; t <= p - 1; t++) {
+                u32 fa, fb;
+                if (p == 1) {
+                    fa = 1; fb = 1;
+                } else {
+                    fa = (pb[t] + MOD - gb[t]) % MOD;
+                    int v = p - t;
+                    fb = (pa[v] + MOD - ga[v]) % MOD;
+                }
+                if (fa == 0 && fb == 0) continue;
+                cb[t] = (cb[t] + fb) % MOD;
+                int v = p - t;
+                ca[v] = (ca[v] + fa) % MOD;
+                ans[t + n - p + 1] = (ans[t + n - p + 1] + fa) % MOD;
+                ans[t] = (ans[t] + fb) % MOD;
+            }
+        }
+        for (int i = 0; i <= n; i++) printf("%u%c", ans[i], i == n ? '\n' : ' ');
     }
-    
     return 0;
 }
 ```
