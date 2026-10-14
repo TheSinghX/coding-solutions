@@ -59,53 +59,60 @@ Output
 
 ## Solution
 
-**Language:** Python  
+**Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:52:02.646Z  
+**Submitted:** 2026-10-14T15:43:22.727Z  
 
-```py
-import sys
-def main():
-    data = sys.stdin.buffer.read().split()
-    t = int(data[0]); p = 1
-    out = []
-    for _ in range(t):
-        n = int(data[p]); p += 1
-        P = [0] + list(map(int, data[p:p+n])); p += n
-        pre = [0] * (n + 1)
-        c = 0
-        for i in range(1, n + 1):
-            if P[i] == i:
-                c += 1
-            pre[i] = c
-        base = c
-        M = n + 1
-        keys = []
-        for i in range(1, n + 1):
-            j = P[i]
-            if j != i:
-                m = i if i < j else j
-                keys.append((i + j) * M + (n - m))  # s ascending, m descending
-        keys.sort()
-        best = 0
-        prev_s = -1
-        gain = 0
-        cf = 0
-        for k in keys:
-            s, r = divmod(k, M)
-            L = n - r
-            if s != prev_s:
-                prev_s = s
-                gain = 0
-                cf = 1 if (s % 2 == 0 and P[s // 2] == s // 2) else 0
-            gain += 1
-            v = gain - (pre[s - L] - pre[L - 1] - cf)
-            if v > best:
-                best = v
-        out.append(base + best)
-    print("\n".join(map(str, out)))
-main()
+```c_cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> p(n + 1);
+    int total_fixed = 0;
+    
+    unordered_map<int, int> total_elements_with_sum;
+    unordered_map<int, int> fixed_with_sum;
+    
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i];
+        int s = i + p[i];
+        total_elements_with_sum[s]++;
+        if (p[i] == i) {
+            total_fixed++;
+            fixed_with_sum[s]++;
+        }
+    }
+    
+    int max_fixed = total_fixed;
+    
+    for (auto& entry : total_elements_with_sum) {
+        int s = entry.first;
+        int t_s = entry.second;
+        int f_s = fixed_with_sum[s];
+        
+        int current_fixed = total_fixed - f_s + t_s;
+        max_fixed = max(max_fixed, current_fixed);
+    }
+    
+    cout << max_fixed << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
+}
 ```
 
 ---
