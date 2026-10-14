@@ -1,41 +1,35 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-    int t;
-    scanf("%d", &t);
-    while (t--) {
-        int n;
-        scanf("%d", &n);
-        vector<int> P(n + 1), pre(n + 1, 0);
-        for (int i = 1; i <= n; i++) {
-            scanf("%d", &P[i]);
-            pre[i] = pre[i - 1] + (P[i] == i);
-        }
-        int base = pre[n];
-        vector<pair<int, int>> v; // (s, -m)
-        v.reserve(n);
-        for (int i = 1; i <= n; i++) {
-            if (P[i] != i) {
-                v.push_back({i + P[i], -min(i, P[i])});
-            }
-        }
-        sort(v.begin(), v.end());
-        int best = 0;
-        size_t idx = 0;
-        while (idx < v.size()) {
-            int s = v[idx].first;
-            int gain = 0;
-            bool centerFixed = (s % 2 == 0 && P[s / 2] == s / 2);
-            while (idx < v.size() && v[idx].first == s) {
-                int L = -v[idx].second;
-                gain++;
-                int loss = pre[s - L] - pre[L - 1] - (centerFixed ? 1 : 0);
-                best = max(best, gain - loss);
-                idx++;
-            }
-        }
-        printf("%d\n", base + best);
-    }
-    return 0;
-}
+# cook your dish here
+import sys
+def main():
+    data = sys.stdin.buffer.read().split()
+    t = int(data[0]); p = 1
+    out = []
+    for _ in range(t):
+        n = int(data[p]); p += 1
+        P = data[p:p+n]; p += n
+        P = [0] + [int(x) for x in P]
+        pre = [0]*(n+1)
+        for i in range(1, n+1):
+            pre[i] = pre[i-1] + (1 if P[i] == i else 0)
+        base = pre[n]
+        groups = {}
+        for i in range(1, n+1):
+            j = P[i]
+            if i < j and P[j] == i:
+                groups.setdefault(i+j, []).append(i)
+        best = 0
+        for s, lst in groups.items():
+            lst.sort(reverse=True)
+            g = 0
+            for i in lst:
+                g += 2
+                a, b = i, s-i
+                loss = pre[b] - pre[a-1]
+                if s % 2 == 0 and P[s//2] == s//2:
+                    loss -= 1
+                v = g - loss
+                if v > best:
+                    best = v
+        out.append(base + best)
+    print("\n".join(map(str, out)))
+main()
