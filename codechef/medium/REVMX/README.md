@@ -59,60 +59,47 @@ Output
 
 ## Solution
 
-**Language:** c_cpp  
+**Language:** Python  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:43:46.928Z  
+**Submitted:** 2026-10-14T15:42:23.974Z  
 
-```c_cpp
-#include <bits/stdc++.h>
-using namespace std;
-
-void solve() {
-    int n;
-    cin >> n;
-    vector<int> p(n + 1);
-    int total_fixed = 0;
-    
-    unordered_map<int, int> total_elements_with_sum;
-    unordered_map<int, int> fixed_with_sum;
-    
-    for (int i = 1; i <= n; i++) {
-        cin >> p[i];
-        int s = i + p[i];
-        total_elements_with_sum[s]++;
-        if (p[i] == i) {
-            total_fixed++;
-            fixed_with_sum[s]++;
-        }
-    }
-    
-    int max_fixed = total_fixed;
-    
-    for (auto& entry : total_elements_with_sum) {
-        int s = entry.first;
-        int t_s = entry.second;
-        int f_s = fixed_with_sum[s];
-        
-        int current_fixed = total_fixed - f_s + t_s;
-        max_fixed = max(max_fixed, current_fixed);
-    }
-    
-    cout << max_fixed << "\n";
-}
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    int t;
-    cin >> t;
-    while (t--) {
-        solve();
-    }
-    
-    return 0;
-}
+```py
+# cook your dish here
+import sys
+def main():
+    data = sys.stdin.buffer.read().split()
+    t = int(data[0]); p = 1
+    out = []
+    for _ in range(t):
+        n = int(data[p]); p += 1
+        P = data[p:p+n]; p += n
+        P = [0] + [int(x) for x in P]
+        pre = [0]*(n+1)
+        for i in range(1, n+1):
+            pre[i] = pre[i-1] + (1 if P[i] == i else 0)
+        base = pre[n]
+        groups = {}
+        for i in range(1, n+1):
+            j = P[i]
+            if i < j and P[j] == i:
+                groups.setdefault(i+j, []).append(i)
+        best = 0
+        for s, lst in groups.items():
+            lst.sort(reverse=True)
+            g = 0
+            for i in lst:
+                g += 2
+                a, b = i, s-i
+                loss = pre[b] - pre[a-1]
+                if s % 2 == 0 and P[s//2] == s//2:
+                    loss -= 1
+                v = g - loss
+                if v > best:
+                    best = v
+        out.append(base + best)
+    print("\n".join(map(str, out)))
+main()
 ```
 
 ---
