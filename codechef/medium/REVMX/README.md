@@ -59,29 +59,52 @@ Output
 
 ## Solution
 
-**Language:** c_cpp  
+**Language:** Python  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-14T15:45:58.920Z  
+**Submitted:** 2026-10-14T15:42:57.930Z  
 
-```c_cpp
+```py
 #include <bits/stdc++.h>
 using namespace std;
-int main(){
-    int t; scanf("%d",&t);
-    while(t--){
-        int n; scanf("%d",&n);
-        vector<int> p(n+1);
-        for(int i=1;i<=n;i++) scanf("%d",&p[i]);
-        auto f=[&](){int c=0;for(int i=1;i<=n;i++)c+=p[i]==i;return c;};
-        int best=f();
-        for(int l=1;l<=n;l++)for(int r=l;r<=n;r++){
-            reverse(p.begin()+l,p.begin()+r+1);
-            best=max(best,f());
-            reverse(p.begin()+l,p.begin()+r+1);
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        vector<int> P(n + 1), pre(n + 1, 0);
+        for (int i = 1; i <= n; i++) {
+            scanf("%d", &P[i]);
+            pre[i] = pre[i - 1] + (P[i] == i);
         }
-        printf("%d\n",best);
+        int base = pre[n];
+        vector<pair<int, int>> v; // (s, -m)
+        v.reserve(n);
+        for (int i = 1; i <= n; i++) {
+            if (P[i] != i) {
+                v.push_back({i + P[i], -min(i, P[i])});
+            }
+        }
+        sort(v.begin(), v.end());
+        int best = 0;
+        size_t idx = 0;
+        while (idx < v.size()) {
+            int s = v[idx].first;
+            int gain = 0;
+            bool centerFixed = (s % 2 == 0 && P[s / 2] == s / 2);
+            while (idx < v.size() && v[idx].first == s) {
+                int L = -v[idx].second;
+                gain++;
+                int loss = pre[s - L] - pre[L - 1] - (centerFixed ? 1 : 0);
+                best = max(best, gain - loss);
+                idx++;
+            }
+        }
+        printf("%d\n", base + best);
     }
+    return 0;
 }
 ```
 
